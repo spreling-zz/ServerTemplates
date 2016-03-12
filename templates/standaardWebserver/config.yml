@@ -1,0 +1,7 @@
+name: Standaard Webserver
+description: |
+    # Description of the Catalog Entry
+version: 0.1
+category: webserver
+maintainer: Harm Jacob Drijfhout
+license: private
