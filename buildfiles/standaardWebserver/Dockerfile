@@ -1,8 +1,8 @@
 FROM ubuntu:latest
 MAINTAINER Harm Jacob Drijfhout <spreling@gmail.com>
 
-RUN apt-get update && apt-get install -y nano
-RUN apt-get install apache2
+RUN apt-get update && apt-get install -y nano apache2
+
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
