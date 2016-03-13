@@ -2,7 +2,8 @@ version: '2'
 services:
   webserver:
     build: .
-    ports:
-     - "80:80"
+    tty: true
+    stdin_open: true
+
     labels:
       io.rancher.container.hostname_override: container_name
