@@ -4,3 +4,5 @@
   description: "Apache webserver met php"
   uuid: standaardWebserver-0
   minimum_rancher_version: v0.63.0
+webserver:
+  scale: 1
