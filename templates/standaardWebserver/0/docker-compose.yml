@@ -1,4 +1,4 @@
-version: 2
+version: "2"
 services:
   webserver:
     build: https://raw.githubusercontent.com/spreling/ServerTemplates/master/buildfiles/standaardWebserver/Dockerfile
