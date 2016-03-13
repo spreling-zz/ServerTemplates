@@ -1,7 +1,7 @@
-version: '2'
+version: 2
 services:
   webserver:
-    build: .
+    build: https://raw.githubusercontent.com/spreling/ServerTemplates/master/buildfiles/standaardWebserver/Dockerfile
     ports:
      - "80:80"
     labels:
