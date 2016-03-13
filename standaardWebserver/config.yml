@@ -1,6 +1,7 @@
 name: Standaard Webserver
-description: Description of the Catalog Entry
+description: |
+               bhahfg Replica Set.
 category: webserver
 maintainer: Harm Jacob Drijfhout
 license: private
-projectURL: none
+version: 3.2-rancher1
