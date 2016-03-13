@@ -1,8 +1,10 @@
-webserver:
-  image: ubuntu:latest
-  tty: true
-  stdin_open: true
-  ports:
-   - 80:80
-  labels:
-    io.rancher.container.hostname_override: container_name
+version: '2'
+services:
+  webserver:
+    build: .
+    tty: true
+    stdin_open: true
+    ports:
+     - 80:80
+    labels:
+      io.rancher.container.hostname_override: container_name
