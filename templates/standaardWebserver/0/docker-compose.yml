@@ -2,8 +2,6 @@ version: '2'
 services:
   webserver:
     build: .
-    tty: true
-    stdin_open: true
     ports:
      - 80:80
     labels:
