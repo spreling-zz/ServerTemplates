@@ -4,13 +4,5 @@
   description: "Apache webserver met php"
   uuid: standaardWebserver-0
   minimum_rancher_version: v0.60.0
-  questions:
-    - variable: "EULA"
-      label: "Accept EULA"
-      description: "Select TRUE to accept the Minecraft EULA"
-      required: true
-      type: "enum"
-      options:
-        - TRUE
 webserver:
   scale: 1
