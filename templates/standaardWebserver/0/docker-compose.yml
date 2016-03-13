@@ -1,6 +1,5 @@
-
 webserver:
-  image: ubuntu
+  image: ubuntu:latest
   tty: true
   stdin_open: true
   ports:
