@@ -3,6 +3,6 @@ services:
   webserver:
     build: .
     ports:
-     - 80:80
+     - "80:80"
     labels:
       io.rancher.container.hostname_override: container_name
