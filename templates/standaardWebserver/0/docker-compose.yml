@@ -1,5 +1,5 @@
 webserver:
-  build: https://raw.githubusercontent.com/spreling/ServerTemplates/master/buildfiles/standaardWebserver/Dockerfile
+  build: https://github.com/spreling/ServerTemplates.git#:standaardWebserverDockerfile
   ports:
    - "80:80"
   labels:
