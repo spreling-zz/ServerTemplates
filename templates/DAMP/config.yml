@@ -1,0 +1,10 @@
+name: "(D)ocker (A)pache (M)ysql (P)hpP"
+description: |
+      A docker service to create a DAMP service with a separate
+       - Apache + PHP container
+       - Mysql container
+       - Phpmyadmin container. (For development purpose)
+category: webserver
+maintainer: Harm Jacob Drijfhout
+license: private
+version: 0.1
