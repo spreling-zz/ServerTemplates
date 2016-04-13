@@ -6,7 +6,7 @@
        - Apache + PHP container
        - Mysql container
        - Phpmyadmin container. (For development purpose)
-  uuid: damp-0
+  uuid: damp-1
   minimum_rancher_version: v0.63.0
   questions:
     - variable: "DOMAIN_NAME"
