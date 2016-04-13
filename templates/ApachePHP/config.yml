@@ -1,0 +1,6 @@
+name: ApachePHP Web services
+description: | Apache webserver met php
+category: webserver
+maintainer: Harm Jacob Drijfhout
+license: private
+version: 1.3

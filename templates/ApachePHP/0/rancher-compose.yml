@@ -1,0 +1,8 @@
+.catalog:
+  name: "ApachePHP Web service"
+  version: 1.3
+  description: "Apache webserver met php"
+  uuid: ApachePHP-0
+  minimum_rancher_version: v0.60.0
+webserver:
+  scale: 1
