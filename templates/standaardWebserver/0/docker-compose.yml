@@ -1,7 +1,8 @@
 webService:
-  build: https://raw.githubusercontent.com/spreling/ServerTemplates/master/buildfiles/ApachePHP/ApachePHP.tar
+  build: https://raw.githubusercontent.com/spreling/ServerTemplates/master/buildfiles/ApachePHP/ApachePHP.tar.gz
   ports:
     - "80:80"
   restart: always
   labels:
     io.rancher.container.hostname_override: container_name
+    
