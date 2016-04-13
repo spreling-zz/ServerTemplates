@@ -1,0 +1,32 @@
+.catalog:
+  name: "(D)ocker (A)pache (M)ysql (P)hpP"
+  version: 0.2
+  description: |
+      A docker service to create a DAMP service with a separate
+       - Apache + PHP container
+       - Mysql container
+       - Phpmyadmin container. (For development purpose)
+  uuid: dam-0
+  minimum_rancher_version: v0.63.0
+  questions:
+    - variable: "DOMAIN_NAME"
+      label: "Welke Domein naam wil je gebruiken"
+      description: "Dit stelt de load balancer goed in. Je moet het zelf nog toevoegen in de HOSTS file"
+      required: true
+      default: damp-project
+      type: "string"
+    - variable: "MYSQL_ROOT_PASSWORD"
+      label: "Root Password"
+      description: "Dit is het master password en gebruik je standaard niet voor de connectie tussen apache en mysql zorg dat dit een goed veilig gerandomiseerd wachtwoord is"
+      required: true
+      type: "string"
+    - variable: "MYSQL_USER"
+      label: "MySQL username"
+      description: "Dit is de username die je kunt gebruik voor connectie met mysql. Er word ook meteen een gelijknamige database aangemaakt met deze naam"
+      required: true
+      type: "string"
+    - variable: "MYSQL_PASSWORD"
+      label: "MySQL password"
+      description: "Dit is het wachtwoord dat hoort bij de username"
+      required: true
+      type: "password"

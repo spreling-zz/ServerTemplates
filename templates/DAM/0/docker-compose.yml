@@ -1,0 +1,22 @@
+webservice:
+  build: https://raw.githubusercontent.com/spreling/ServerTemplates/master/buildfiles/ApachePHP/ApachePHP.tar.gz
+  ports:
+    - "80:80"
+  links:
+    - mysqlservice:mysql
+  restart: always
+  labels:
+    io.rancher.container.hostname_override: container_name
+
+mysqlservice:
+  image: mysql:latest
+  environment:
+    - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    - MYSQL_DATABASE=${MYSQL_USER}
+    - MYSQL_USER=${MYSQL_USER}
+    - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+  volumes:
+    - /docker-entrypoint-initdb.d
+  restart: always
+  labels:
+    io.rancher.container.hostname_override: container_name
