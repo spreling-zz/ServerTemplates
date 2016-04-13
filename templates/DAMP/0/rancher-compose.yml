@@ -30,13 +30,13 @@
       description: "Dit is het wachtwoord dat hoort bij de username"
       required: true
       type: "password"
-lb:
-  scale: 1
-  load_balancer_config:
-    name: lb config
-webService:
-  scale: 1
-mysqlService:
-  scale: 1
-phpmyadminService:
-  scale: 1
+# lb:
+#   scale: 1
+#   load_balancer_config:
+#     name: lb config
+# webService:
+#   scale: 1
+# mysqlService:
+#   scale: 1
+# phpmyadminService:
+#   scale: 1
