@@ -1,12 +1,12 @@
 .catalog:
   name: "(D)ocker (A)pache (M)ysql (P)hpP"
-  version: 0.3
+  version: 0.4
   description: |
       A docker service to create a DAMP service with a separate
        - Apache + PHP container
        - Mysql container
        - Phpmyadmin container. (For development purpose)
-  uuid: damp-2
+  uuid: damp-3
   minimum_rancher_version: v0.63.0
   questions:
     - variable: "DOMAIN_NAME"
