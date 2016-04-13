@@ -5,5 +5,3 @@ webservice:
   restart: always
   labels:
     io.rancher.container.hostname_override: container_name
-
-    
