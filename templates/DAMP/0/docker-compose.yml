@@ -1,5 +1,5 @@
 webservice:
-  build: https://raw.githubusercontent.com/spreling/ServerTemplates/master/buildfiles/ApachePHP/ApachePHP.tar.gz
+  image: spreling/server:apachephp
   ports:
     - "80:80"
   links:
