@@ -1,14 +1,14 @@
-webService:
+webservice:
   build: https://raw.githubusercontent.com/spreling/ServerTemplates/master/buildfiles/ApachePHP/ApachePHP.tar.gz
   ports:
     - "80:80"
   links:
-    - mysqlService:mysql
+    - mysqlservice:mysql
   restart: always
   labels:
     io.rancher.container.hostname_override: container_name
-    
-mysqlService:
+
+mysqlservice:
   image: mysql:latest
   environment:
     - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
@@ -21,14 +21,14 @@ mysqlService:
   labels:
     io.rancher.container.hostname_override: container_name
 
-phpmyadminService:
+phpmyadminservice:
   image: phpmyadmin/phpmyadmin:latest
   environment:
     - PHP_UPLOAD_MAX_FILESIZE =60
   ports:
     - "8080:80"
   links:
-    - mysqlService:db
+    - mysqlservice:db
   restart: always
   labels:
     io.rancher.container.hostname_override: container_name
@@ -39,9 +39,9 @@ lb:
     - 80:80
     - 8080:8080
   links:
-    - phpmyadminService:phpmyadminService
-    - webService:webService
+    - phpmyadminservice:phpmyadminservice
+    - webservice:webservice
   labels:
     io.rancher.container.hostname_override: container_name
-    io.rancher.loadbalancer.target.phpmyadminService: phpmyadmin.${DOMAIN_NAME}.3=8080
-    io.rancher.loadbalancer.target.webService: www.${DOMAIN_NAME}.3=80
+    io.rancher.loadbalancer.target.phpmyadminservice: phpmyadmin.${DOMAIN_NAME}.3=8080
+    io.rancher.loadbalancer.target.webservice: www.${DOMAIN_NAME}.3=80
