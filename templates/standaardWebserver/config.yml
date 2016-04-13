@@ -1,7 +1,6 @@
-name: Standaard Webserver
-description: |
-               aaaaaaaaaaaaaaaaaaaaaaaaaaaabhahfg Replicasdfsdfdfsf Set.
+name: ApachePHP Web services
+description: | Apache webserver met php
 category: webserver
 maintainer: Harm Jacob Drijfhout
 license: private
-version: Apache 2.4.7
+version: 1.3
