@@ -46,12 +46,25 @@ ENV ALLOW_OVERRIDE **False**
 # set some basic security settings
 RUN echo "Servername $(cat /etc/hostname)" >> /etc/apache2/apache2.conf && \
     sed -i "s/ServerSignature.*/ServerSignature Off/g" /etc/apache2/conf-enabled/security.conf && \
-    sed -i "s/ServerTokens.*/ServerTokens PROD/g" /etc/apache2/conf-enabled/security.conf && \
-    sed -i '/<Directory/{n; s/Options .*/Options -FollowSymLinks/g}' /etc/apache2/apache2.conf && \
+    sed -i "s/ServerTokens.*/ServerTokens PROD/g" /etc/apache2/conf-enabled/security.conf && \\
     sed -ie '/<Directory \/usr\/share>/,/<\/Directory>/ s|.*|#&|g' /etc/apache2/apache2.conf && \
-    sed -ie '/<Directory \/var\/www\/>/,/<\/Directory>/ s|.*|#&|g' /etc/apache2/apache2.conf
+    sed -ie '
+    	/<Directory \/>/,/<\/Directory>/ {
+    	    s_Options .*_Options -FollowSymLinks -Includes -ExecCGI_
+          s_AllowOverride .*_AllowOverride None_
+          s_Require all .*_Require all denied_
+    	}
+    ' /etc/apache2/apache2.conf && \
+    sed -ie '
+      /<Directory \/var\/www\/>/,/<\/Directory>/ {
+          s_<Directory /var/www/>_<Directory /var/sites/>_
+          s_Options .*_Options -FollowSymLinks -Includes -ExecCGI_
+          s_AllowOverride .*_AllowOverride None_
+          s_Require all .*_Require all granted_
+      }
+    ' /etc/apache2/apache2.conf
 
-    #sed -i "s:/var/www/:/var/sites/customers/main/:" /etc/apache2/apache2.conf
+
 #configure modsecurity
 RUN mv /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf && \
     sed -i "s/SecRuleEngine DetectionOnly/SecRuleEngine On/g" /etc/modsecurity/modsecurity.conf && \
@@ -66,14 +79,15 @@ RUN mv /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurit
 RUN sed -i.bak "s/post_max_size = 8M/post_max_size = 32M/" /etc/php5/apache2/php.ini && \
 sed -i.bak "s/upload_max_filesize = 2M/upload_max_filesize = 32M/" /etc/php5/apache2/php.ini
 
-ADD configs/000-default.conf /etc/apache2/sites-available/000-default.conf
-
 #create folder structure for websites
 RUN mkdir -p /var/sites/customers/main/www && \
     mkdir -p /var/sites/customers/main/logs && \
     touch /var/sites/customers/main/logs/error.log &&\
     touch /var/sites/customers/main/logs/access.log &&\
     a2ensite 000-default
+
+ADD configs/000-default.conf /etc/apache2/sites-available/000-default.conf
+ADD configs/index.php /var/sites/customers/main/www/index.php
 
 #add startup script to container
 COPY startup.sh /usr/local/bin/startup.sh
