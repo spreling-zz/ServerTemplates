@@ -46,22 +46,18 @@ ENV ALLOW_OVERRIDE **False**
 # set some basic security settings
 RUN echo "Servername $(cat /etc/hostname)" >> /etc/apache2/apache2.conf && \
     sed -i "s/ServerSignature.*/ServerSignature Off/g" /etc/apache2/conf-enabled/security.conf && \
-    sed -i "s/ServerTokens.*/ServerTokens PROD/g" /etc/apache2/conf-enabled/security.conf && \\
+    sed -i "s/ServerTokens.*/ServerTokens PROD/g" /etc/apache2/conf-enabled/security.conf && \
     sed -ie '/<Directory \/usr\/share>/,/<\/Directory>/ s|.*|#&|g' /etc/apache2/apache2.conf && \
-    sed -ie '
-    	/<Directory \/>/,/<\/Directory>/ {
-    	    s_Options .*_Options -FollowSymLinks -Includes -ExecCGI_
-          s_AllowOverride .*_AllowOverride None_
-          s_Require all .*_Require all denied_
-    	}
-    ' /etc/apache2/apache2.conf && \
-    sed -ie '
-      /<Directory \/var\/www\/>/,/<\/Directory>/ {
-          s_<Directory /var/www/>_<Directory /var/sites/>_
-          s_Options .*_Options -FollowSymLinks -Includes -ExecCGI_
-          s_AllowOverride .*_AllowOverride None_
-          s_Require all .*_Require all granted_
-      }
+    sed -ie '/<Directory \/>/,/<\/Directory>/ { \
+                s_AllowOverride .*_AllowOverride None_; \
+                s_Options .*_Options -FollowSymLinks -Includes -ExecCGI_; \
+                s_Require all .*_Require all denied_}' \
+                /etc/apache2/apache2.conf && \
+    sed -ie '/<Directory \/var\/www\/>/,/<\/Directory>/ { \
+                s_<Directory /var/www/>_<Directory /var/sites/>_; \
+                s_Options .*_Options -FollowSymLinks -Includes -ExecCGI_; \
+                s_AllowOverride .*_AllowOverride None_; \
+                s_Require all .*_Require all granted_} \
     ' /etc/apache2/apache2.conf
 
 
