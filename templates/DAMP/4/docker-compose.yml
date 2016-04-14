@@ -31,7 +31,7 @@ phpmyadminservice:
 
 lb:
   image: rancher/load-balancer-service
-  ports:
+  expose:
     - 80:80
   links:
     - phpmyadminservice:phpmyadminservice
@@ -39,4 +39,4 @@ lb:
   labels:
     io.rancher.container.hostname_override: container_name
     io.rancher.loadbalancer.target.phpmyadminservice: phpmyadmin.${DOMAIN_NAME}.3=80
-    io.rancher.loadbalancer.target.webservice: www.${DOMAIN_NAME}.3=80
+    io.rancher.loadbalancer.target.webservice: *.${DOMAIN_NAME}.3=80
