@@ -85,6 +85,8 @@ RUN mkdir -p /var/sites/customers/main/www && \
 ADD configs/000-default.conf /etc/apache2/sites-available/000-default.conf
 ADD configs/index.php /var/sites/customers/main/www/index.php
 
+VOLUME /var/sites/customers/main/www
+
 #add startup script to container
 COPY startup.sh /usr/local/bin/startup.sh
 RUN chmod 755 /usr/local/bin/startup.sh

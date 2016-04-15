@@ -1,0 +1,44 @@
+webservice:
+  build: https://raw.githubusercontent.com/spreling/ServerTemplates/master/buildfiles/ApachePHP/ApachePHP.tar.gz
+  links:
+    - mysqlservice:mysql
+  restart: always
+  volumes:
+    - ${APP_PATH}:/var/sites/customers/main/www
+  labels:
+    io.rancher.container.hostname_override: container_name
+
+mysqlservice:
+  image: mysql:latest
+  environment:
+    - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    - MYSQL_DATABASE=${MYSQL_USER}
+    - MYSQL_USER=${MYSQL_USER}
+    - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+  volumes:
+    - /docker-entrypoint-initdb.d
+  restart: always
+  labels:
+    io.rancher.container.hostname_override: container_name
+
+phpmyadminservice:
+  image: phpmyadmin/phpmyadmin:latest
+  environment:
+    - PHP_UPLOAD_MAX_FILESIZE =60
+  links:
+    - mysqlservice:db
+  restart: always
+  labels:
+    io.rancher.container.hostname_override: container_name
+
+lb:
+  image: rancher/load-balancer-service
+  expose:
+    - 80:80
+  links:
+    - phpmyadminservice:phpmyadminservice
+    - webservice:webservice
+  labels:
+    io.rancher.container.hostname_override: container_name
+    io.rancher.loadbalancer.target.phpmyadminservice: phpmyadmin.${DOMAIN_NAME}.3=80
+    io.rancher.loadbalancer.target.webservice: \*.${DOMAIN_NAME}.3=80
