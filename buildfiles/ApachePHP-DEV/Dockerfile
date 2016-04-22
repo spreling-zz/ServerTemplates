@@ -25,7 +25,7 @@ RUN apt-get install -y software-properties-common && \
 
 # enable mcrypt en disable autoindex, status
 RUN /usr/sbin/php5enmod mcrypt && \
-    a2enmod rewrite \
+    a2enmod rewrite
 
 # Set the locale
 RUN locale-gen en_US.UTF-8
