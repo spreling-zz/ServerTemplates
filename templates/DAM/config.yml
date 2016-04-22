@@ -1,7 +1,0 @@
-name: "DAM"
-description: |
-      A docker service to create the Docker Apache Mysql Php service containers
-category: webserver
-maintainer: Harm Jacob Drijfhout
-license: private
-version: 0.2

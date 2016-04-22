@@ -1,12 +1,12 @@
 .catalog:
   name: "(D)ocker (A)pache (M)ysql (P)hpP"
-  version: 0.2
+  version: 0.1
   description: |
       A docker service to create a DAMP service with a separate
        - Apache + PHP container
        - Mysql container
        - Phpmyadmin container. (For development purpose)
-  uuid: dam-0
+  uuid: damp-0
   minimum_rancher_version: v0.63.0
   questions:
     - variable: "DOMAIN_NAME"
@@ -14,6 +14,12 @@
       description: "Dit stelt de load balancer goed in. Je moet het zelf nog toevoegen in de HOSTS file"
       required: true
       default: damp-project
+      type: "string"
+    - variable: "APP_PATH"
+      label: "Wat is het pad waar je aplicatie komt te staan"
+      description: "Deze map word gesynchroniseerd met de apache container"
+      required: true
+      default: /s/phpstormProjects/
       type: "string"
     - variable: "MYSQL_ROOT_PASSWORD"
       label: "Root Password"
@@ -30,3 +36,13 @@
       description: "Dit is het wachtwoord dat hoort bij de username"
       required: true
       type: "password"
+lb:
+  scale: 1
+  load_balancer_config:
+    name: lb config
+webService:
+  scale: 1
+mysqlService:
+  scale: 1
+phpmyadminService:
+  scale: 1

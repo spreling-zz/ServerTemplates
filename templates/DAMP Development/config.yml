@@ -1,0 +1,7 @@
+name: "DAMP development"
+description: |
+      A docker service to create the Docker Apache Mysql Php service containers used for developemnt
+category: webserver
+maintainer: Harm Jacob Drijfhout
+license: private
+version: 0.1
