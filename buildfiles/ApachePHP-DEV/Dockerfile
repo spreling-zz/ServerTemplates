@@ -43,10 +43,10 @@ RUN echo "Servername $(cat /etc/hostname)" >> /etc/apache2/apache2.conf && \
             /etc/apache2/apache2.conf
 
 
-RUN sed -i.bak "s/post_max_size = 8M/post_max_size = 32M/" /etc/php5/apache2/php.ini && \
-sed -i.bak "s/upload_max_filesize = 2M/upload_max_filesize = 32M/" /etc/php5/apache2/php.ini && \
-sed -i.bak "s/display_errors = Off/display_errors = On/" /etc/php5/apache2/php.ini && \
-sed -i.bak "s/display_startup_errors = Off/display_startup_errors = On/" /etc/php5/apache2/php.ini
+RUN sed -i "s/post_max_size = 8M/post_max_size = 32M/" /etc/php5/apache2/php.ini && \
+    sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 32M/" /etc/php5/apache2/php.ini && \
+    sed -i "s/display_errors = Off/display_errors = On/" /etc/php5/apache2/php.ini && \
+    sed -i "s/display_startup_errors = Off/display_startup_errors = On/" /etc/php5/apache2/php.ini
 
 COPY configs/000-default.conf /etc/apache2/sites-available/000-default.conf
 
