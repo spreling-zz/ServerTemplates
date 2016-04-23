@@ -36,13 +36,6 @@ ENV LC_ALL en_US.UTF-8
 ENV LC_MONETARY nl_NL.UTF-8
 
 # set some basic security settings
-RUN echo "Servername $(cat /etc/hostname)" >> /etc/apache2/apache2.conf && \
-    sed -ie '/<Directory \/usr\/share>/,/<\/Directory>/ s|.*|#&|g' /etc/apache2/apache2.conf && \
-    sed -ie '/<Directory \/var\/www\/>/,/<\/Directory>/ { \
-             s_<Directory /var/www/>_<Directory /var/sites/>_}' \
-            /etc/apache2/apache2.conf
-
-
 RUN sed -i "s/post_max_size = 8M/post_max_size = 32M/" /etc/php5/apache2/php.ini && \
     sed -i "s/upload_max_filesize = 2M/upload_max_filesize = 32M/" /etc/php5/apache2/php.ini && \
     sed -i "s/display_errors = Off/display_errors = On/" /etc/php5/apache2/php.ini && \
@@ -51,18 +44,11 @@ RUN sed -i "s/post_max_size = 8M/post_max_size = 32M/" /etc/php5/apache2/php.ini
 COPY configs/000-default.conf /etc/apache2/sites-available/000-default.conf
 
 #create folder structure for websites
-RUN rm -fr /var/www/html && \
-    mkdir -p /var/sites/customers/main/www && \
-    mkdir -p /var/sites/customers/main/logs && \
-    touch /var/sites/customers/main/logs/error.log &&\
-    touch /var/sites/customers/main/logs/access.log &&\
-    a2ensite 000-default && \
-    usermod -u 1000 www-data && \
-    chown -R www-data:www-data /var/sites/
+RUN a2ensite 000-default
 
-COPY configs/index.php /var/sites/customers/main/www/index.php
+COPY configs/index.php /var/www/index.php
 
-VOLUME /var/sites/customers/main/www
+VOLUME /var/www/
 
 #add startup script to container
 COPY startup.sh /usr/local/bin/startup.sh
