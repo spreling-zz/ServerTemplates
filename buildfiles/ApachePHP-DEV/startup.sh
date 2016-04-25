@@ -1,4 +1,6 @@
 #! /bin/bash
+chown -R www-data:www-data /var/www
+
 source /etc/apache2/envvars
 
 echo "Servername $(cat /etc/hostname)" >> /etc/apache2/apache2.conf
