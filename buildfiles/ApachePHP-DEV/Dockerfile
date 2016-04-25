@@ -47,8 +47,9 @@ COPY configs/000-default.conf /etc/apache2/sites-available/000-default.conf
 RUN a2ensite 000-default
 
 COPY configs/index.php /var/www/index.php
+RUN mkdir -p /app && rm -fr /var/www/html && ln -s /app /var/www/html
 
-VOLUME /var/www/
+VOLUME /app/
 
 #add startup script to container
 COPY startup.sh /usr/local/bin/startup.sh

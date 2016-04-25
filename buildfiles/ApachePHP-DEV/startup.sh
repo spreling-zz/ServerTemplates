@@ -1,5 +1,5 @@
 #! /bin/bash
-chown -R www-data:www-data /var/www
+chown www-data:www-data /app -R
 
 source /etc/apache2/envvars
 
