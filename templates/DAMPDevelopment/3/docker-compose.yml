@@ -4,7 +4,7 @@ webservice:
     - mysqlservice:mysql
   restart: always
   volumes:
-    - ${APP_PATH}:/var/www
+    - ${APP_PATH}:/app
   labels:
     io.rancher.container.hostname_override: container_name
 
