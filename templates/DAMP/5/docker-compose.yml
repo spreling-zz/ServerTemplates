@@ -1,5 +1,5 @@
 webservice:
-  build: https://github.com/spreling/ServerTemplates/raw/master/buildfiles/ApachePHP-DEV/ApachePHP-DEV.tar.gz
+  build: https://raw.githubusercontent.com/spreling/ServerTemplates/master/buildfiles/ApachePHP/ApachePHP.tar.gz
   links:
     - mysqlservice:mysql
   restart: always
