@@ -4,6 +4,7 @@ MAINTAINER Harm Jacob Drijfhout <spreling@gmail.com>
 # Configure timezone
 RUN echo "Europe/Amsterdam" > /etc/timezone; dpkg-reconfigure -f noninteractive tzdata
 ENV TERM xterm
+
 # update packagemanager, get all required package and remove packagemanger index after that
 # As last there is a manual install php composer
 RUN apt-get install -y software-properties-common && \
@@ -41,15 +42,18 @@ RUN sed -i "s/post_max_size = 8M/post_max_size = 32M/" /etc/php5/apache2/php.ini
     sed -i "s/display_errors = Off/display_errors = On/" /etc/php5/apache2/php.ini && \
     sed -i "s/display_startup_errors = Off/display_startup_errors = On/" /etc/php5/apache2/php.ini
 
-COPY configs/000-default.conf /etc/apache2/sites-available/000-default.conf
+
+# Fix permissions
+RUN usermod -u 1000 www-data
+RUN chown -R www-data:www-data /var/www
+
 
 #create folder structure for websites
+COPY configs/index.php /var/www/index.php
+COPY configs/000-default.conf /etc/apache2/sites-available/000-default.conf
 RUN a2ensite 000-default
 
-COPY configs/index.php /var/www/index.php
-RUN mkdir -p /app && rm -fr /var/www/html && ln -s /app /var/www/html
-
-VOLUME /app/
+VOLUME /var/www/
 
 #add startup script to container
 COPY startup.sh /usr/local/bin/startup.sh
