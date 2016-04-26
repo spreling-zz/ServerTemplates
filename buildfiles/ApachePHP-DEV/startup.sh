@@ -4,7 +4,7 @@ source /etc/apache2/envvars
 
 echo "Servername $(cat /etc/hostname)" >> /etc/apache2/apache2.conf
 
-chown www-data:www-data /app -R
+#chown www-data:www-data /var/www -R
 
 exec apache2 -D FOREGROUND
 
