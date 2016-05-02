@@ -7,7 +7,7 @@ ENV TERM xterm
 
 # update packagemanager, get all required package and remove packagemanger index after that
 # As last there is a manual install php composer
-RUN apt-get update &&
+RUN apt-get update && \
     add-apt-repository main && add-apt-repository universe && \
     DEBIAN_FRONTEND=noninteractive apt-get -yq install  \
       curl \
