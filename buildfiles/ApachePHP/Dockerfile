@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:trusty
 MAINTAINER Harm Jacob Drijfhout <spreling@gmail.com>
 
 # Configure timezone
