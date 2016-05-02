@@ -8,6 +8,9 @@ ENV TERM xterm
 # update packagemanager, get all required package and remove packagemanger index after that
 # As last there is a manual install php composer
 RUN apt-get update && \
+    apt-get install -y software-properties-common && \
+    add-apt-repository main && add-apt-repository universe && \
+    apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -yq install  \
       curl \
       apache2 \
