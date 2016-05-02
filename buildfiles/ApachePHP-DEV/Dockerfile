@@ -3,7 +3,7 @@ MAINTAINER Harm Jacob Drijfhout <spreling@gmail.com>
 
 # Configure timezone
 RUN echo "Europe/Amsterdam" > /etc/timezone; dpkg-reconfigure -f noninteractive tzdata
-ENV TERM xterm
+#ENV TERM xterm
 
 # update packagemanager, get all required package and remove packagemanger index after that
 # As last there is a manual install php composer
